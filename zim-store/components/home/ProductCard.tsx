@@ -12,7 +12,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import type { ProductCard as Product } from '@/types/shop';
 import { PRIMARY_YELLOW, SECONDARY_GREEN, TEXT_PRIMARY, TEXT_SECONDARY } from '@/constants/colors';
-import { Radius, Spacing, Shadows } from '@/constants/ui';
+import { Radius, Spacing, Shadows, FontSize } from '@/constants/ui';
 
 type Props = {
   product: Product;
@@ -100,10 +100,10 @@ const styles = StyleSheet.create({
     height: 180,
   },
   productBody: {
-    padding: Spacing.md,
+    padding: Spacing.lg,
   },
   productTitle: {
-    fontSize: 15,
+    fontSize: 16,
     fontWeight: '700',
     color: TEXT_PRIMARY,
   },
@@ -116,11 +116,11 @@ const styles = StyleSheet.create({
   },
   ratingText: {
     marginLeft: Spacing.xs,
-    fontSize: 12,
+    fontSize: FontSize.caption,
     color: '#444',
   },
   sellerText: {
-    fontSize: 12,
+    fontSize: FontSize.body,
     color: TEXT_SECONDARY,
     marginTop: 2,
   },
@@ -133,7 +133,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#E6F4EA',
   },
   verifiedText: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '600',
     color: SECONDARY_GREEN,
   },
@@ -149,7 +149,7 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(46, 125, 50, 0.06)',
   },
   localText: {
-    fontSize: 10,
+    fontSize: 11,
     fontWeight: '700',
     color: SECONDARY_GREEN,
   },
@@ -167,7 +167,7 @@ const styles = StyleSheet.create({
   cartButton: {
     width: 32,
     height: 32,
-    borderRadius: Radius.xs,
+    borderRadius: Radius.sm,
     backgroundColor: PRIMARY_YELLOW,
     alignItems: 'center',
     justifyContent: 'center',

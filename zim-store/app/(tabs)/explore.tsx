@@ -8,6 +8,7 @@ import { ThemedText } from '@/components/themed-text';
 import { ThemedView } from '@/components/themed-view';
 import { IconSymbol } from '@/components/ui/icon-symbol';
 import { Fonts } from '@/constants/theme';
+import { FontSize, Spacing } from '@/constants/ui';
 
 export default function TabTwoScreen() {
   return (
@@ -26,6 +27,8 @@ export default function TabTwoScreen() {
           type="title"
           style={{
             fontFamily: Fonts.rounded,
+            fontSize: FontSize.h1,
+            fontWeight: '800',
           }}>
           Explore
         </ThemedText>
@@ -108,5 +111,7 @@ const styles = StyleSheet.create({
   titleContainer: {
     flexDirection: 'row',
     gap: 8,
+    paddingHorizontal: Spacing.lg,
+    marginBottom: Spacing.sm,
   },
 });

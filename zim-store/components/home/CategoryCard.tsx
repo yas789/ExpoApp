@@ -13,7 +13,7 @@ import {
 import { Ionicons } from '@expo/vector-icons';
 import * as Haptics from 'expo-haptics';
 import type { CategoryCard as Category } from '@/types/shop';
-import { Radius, Spacing, Shadows } from '@/constants/ui';
+import { Radius, Spacing, Shadows, FontSize } from '@/constants/ui';
 
 type Props = {
   category: Category;
@@ -23,6 +23,7 @@ type Props = {
 
 export function CategoryCard({ category, style, onPress }: Props) {
   const scale = useRef(new Animated.Value(1)).current;
+  const chevronScale = useRef(new Animated.Value(1)).current;
 
   const handlePressIn = () => {
     Animated.spring(scale, {
@@ -46,6 +47,12 @@ export function CategoryCard({ category, style, onPress }: Props) {
     Haptics.selectionAsync().catch(() => {});
     onPress?.(category);
   };
+  const onChevronIn = () => {
+    Animated.spring(chevronScale, { toValue: 0.92, useNativeDriver: true, speed: 20, bounciness: 6 }).start();
+  };
+  const onChevronOut = () => {
+    Animated.spring(chevronScale, { toValue: 1, useNativeDriver: true, speed: 20, bounciness: 6 }).start();
+  };
 
   return (
     <Animated.View style={[styles.categoryCard, style, { transform: [{ scale }] }]}>
@@ -65,9 +72,11 @@ export function CategoryCard({ category, style, onPress }: Props) {
           <Text style={styles.countText}>{category.itemsCount} items</Text>
         </View>
 
-        <View style={styles.chevronBadge}>
-          <Ionicons name="chevron-forward" size={14} color="#111" />
-        </View>
+        <Pressable onPressIn={onChevronIn} onPressOut={onChevronOut} onPress={handlePress} style={{ position: 'absolute', right: Spacing.sm, bottom: Spacing.sm }} hitSlop={6}>
+          <Animated.View style={[styles.chevronBadge, { transform: [{ scale: chevronScale }] }]}>
+            <Ionicons name="chevron-forward" size={14} color="#111" />
+          </Animated.View>
+        </Pressable>
 
         <View style={styles.categoryContent}>
           <Text style={styles.categoryName}>{category.name}</Text>
@@ -79,12 +88,13 @@ export function CategoryCard({ category, style, onPress }: Props) {
 
 const styles = StyleSheet.create({
   categoryCard: {
-    borderRadius: Radius.md,
+    borderRadius: Radius.lg,
     overflow: 'hidden',
-    height: 160,
+    aspectRatio: 7 / 5,
+    marginBottom: Spacing.md,
     ...Platform.select({
-      ios: Shadows?.sm ?? {},
-      android: Shadows?.sm ?? {},
+      ios: Shadows?.md ?? {},
+      android: Shadows?.md ?? {},
     }),
   },
   pressable: {
@@ -96,7 +106,7 @@ const styles = StyleSheet.create({
   },
   categoryOverlay: {
     ...StyleSheet.absoluteFillObject,
-    backgroundColor: 'rgba(0,0,0,0.25)',
+    backgroundColor: 'rgba(0,0,0,0.2)',
   },
   categoryContent: {
     position: 'absolute',
@@ -104,7 +114,7 @@ const styles = StyleSheet.create({
     bottom: Spacing.lg,
   },
   categoryName: {
-    fontSize: 18,
+    fontSize: FontSize.lg,
     fontWeight: '800',
     color: '#FFFFFF',
   },
@@ -112,13 +122,13 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: Spacing.sm,
     left: Spacing.sm,
-    paddingHorizontal: Spacing.md,
+    paddingHorizontal: Spacing.xs,
     paddingVertical: Spacing.xs,
-    borderRadius: 999,
+    borderRadius: Radius.sm,
     backgroundColor: 'rgba(255,255,255,0.9)',
   },
   countText: {
-    fontSize: 11,
+    fontSize: FontSize.caption,
     fontWeight: '700',
     color: '#222',
   },

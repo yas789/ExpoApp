@@ -46,13 +46,13 @@ function CategoryPill({ label }: { label: string }) {
 const styles = StyleSheet.create({
   navRow: {
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: Spacing.lg,
-    paddingVertical: Spacing.sm,
-    columnGap: Spacing.sm,
+    paddingHorizontal: 28,
+    paddingVertical: 20,
+    columnGap: Spacing.md,
   },
   navItem: {
-    paddingHorizontal: Spacing.md,
-    paddingVertical: Spacing.sm,
+    paddingHorizontal: 24,
+    paddingVertical: 14,
     borderRadius: 999,
     borderWidth: 1,
     borderColor: '#E0E0E0',

@@ -2,28 +2,33 @@ import React from 'react';
 import { View, Text, StyleSheet, TextInput, TouchableOpacity, Platform } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 import { PRIMARY_YELLOW } from '@/constants/colors';
+import { Radius, Spacing } from '@/constants/ui';
 
 export function HeaderBar() {
   return (
     <View style={styles.header}>
-      <Text style={styles.logo}>Amazin</Text>
-      <View style={styles.searchContainer}>
-        <Ionicons name="search" size={16} color="#888" style={styles.searchIcon} />
-        <TextInput
-          placeholder="Search for products..."
-          placeholderTextColor="#999"
-          style={styles.searchInput}
-        />
-      </View>
-      <View style={styles.headerIcons}>
-        <TouchableOpacity style={styles.iconButton} accessibilityRole="button" accessibilityLabel="Account">
-          <Ionicons name="person-outline" size={20} color="#333" />
-        </TouchableOpacity>
-        <View style={styles.cartWrapper}>
-          <TouchableOpacity style={styles.iconButton} accessibilityRole="button" accessibilityLabel="Cart">
-            <Ionicons name="cart-outline" size={20} color="#333" />
+      <View style={styles.headerInner}>
+        <Text style={styles.logo}>Amazin</Text>
+
+        <View style={styles.searchContainer}>
+          <Ionicons name="search" size={18} color="#888" style={styles.searchIcon} />
+          <TextInput
+            placeholder="Search for products..."
+            placeholderTextColor="#999"
+            style={styles.searchInput}
+          />
+        </View>
+
+        <View style={styles.iconsRow}>
+          <TouchableOpacity style={styles.iconButton} accessibilityRole="button" accessibilityLabel="Account">
+            <Ionicons name="person-outline" size={22} color="#333" />
           </TouchableOpacity>
-          <View style={styles.cartDot} />
+          <View style={styles.cartWrapper}>
+            <TouchableOpacity style={styles.iconButton} accessibilityRole="button" accessibilityLabel="Cart">
+              <Ionicons name="cart-outline" size={22} color="#333" />
+            </TouchableOpacity>
+            <View style={styles.cartDot} />
+          </View>
         </View>
       </View>
     </View>
@@ -33,26 +38,38 @@ export function HeaderBar() {
 const styles = StyleSheet.create({
   header: {
     backgroundColor: '#FFFFFF',
-    paddingHorizontal: 12,
-    paddingVertical: 10,
+    paddingVertical: Spacing.lg,
+    paddingHorizontal: Spacing.sm,
+  },
+  headerInner: {
+    maxWidth: 1024,
+    alignSelf: 'center',
     flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'space-between',
+    paddingHorizontal: Spacing.xl,
+    width: '100%',
   },
   logo: {
     fontSize: 20,
     fontWeight: '800',
-    marginRight: 8,
+  },
+  iconsRow: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: Spacing.sm,
   },
   searchContainer: {
     flex: 1,
     flexDirection: 'row',
     alignItems: 'center',
     backgroundColor: '#F7F7F7',
-    borderRadius: 999,
-    paddingHorizontal: 10,
-    paddingVertical: 5,
+    borderRadius: Radius.lg,
+    paddingHorizontal: Spacing.lg,
+    paddingVertical: Spacing.md,
     borderWidth: 1,
     borderColor: '#E0E0E0',
+    marginHorizontal: Spacing.lg,
     ...Platform.select({
       ios: {
         shadowColor: '#000',
@@ -66,19 +83,15 @@ const styles = StyleSheet.create({
     }),
   },
   searchIcon: {
-    marginRight: 6,
+    marginRight: Spacing.sm,
   },
   searchInput: {
     flex: 1,
-    fontSize: 12,
+    fontSize: 16,
     paddingVertical: 0,
   },
-  headerIcons: {
-    flexDirection: 'row',
-    marginLeft: 8,
-  },
   iconButton: {
-    paddingHorizontal: 6,
+    paddingHorizontal: Spacing.sm,
   },
   cartWrapper: {
     position: 'relative',

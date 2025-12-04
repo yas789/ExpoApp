@@ -13,7 +13,7 @@ export function TopStrip() {
 const styles = StyleSheet.create({
   topStrip: {
     backgroundColor: HEADER_YELLOW,
-    paddingVertical: 6,
+    paddingVertical: 14,
     alignItems: 'center',
   },
   topStripText: {
@@ -22,4 +22,3 @@ const styles = StyleSheet.create({
     color: '#222',
   },
 });
-

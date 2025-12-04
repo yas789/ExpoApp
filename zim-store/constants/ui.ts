@@ -41,3 +41,10 @@ export const Shadows = Platform.select({
   },
 });
 
+export const FontSize = {
+  h1: 28,
+  h2: 20,
+  lg: 18,
+  body: 14,
+  caption: 12,
+} as const;
