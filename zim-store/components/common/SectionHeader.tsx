@@ -9,13 +9,16 @@ type Props = {
   actionLabel?: string;
   titleStyle?: any;
   containerStyle?: any;
+  rightElement?: React.ReactNode;
 };
 
-export function SectionHeader({ title, onPressAction, actionLabel = 'See all', titleStyle, containerStyle }: Props) {
+export function SectionHeader({ title, onPressAction, actionLabel = 'See all', titleStyle, containerStyle, rightElement }: Props) {
   return (
     <View style={[styles.container, containerStyle]}>
       <Text style={[styles.title, titleStyle]}>{title}</Text>
-      {onPressAction ? (
+      {rightElement ? (
+        rightElement
+      ) : onPressAction ? (
         <Pressable android_ripple={{ color: 'rgba(0,0,0,0.06)' }} hitSlop={8} onPress={onPressAction}>
           <Text style={styles.action}>{actionLabel}</Text>
         </Pressable>

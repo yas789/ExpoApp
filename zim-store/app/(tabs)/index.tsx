@@ -1,4 +1,4 @@
-import React, { useMemo, useRef } from 'react';
+import React, { useMemo, useRef, useState } from 'react';
 import { Animated, StyleSheet, View, useWindowDimensions, Platform } from 'react-native';
 import { BACKGROUND } from '@/constants/colors';
 import { Spacing } from '@/constants/ui';
@@ -12,6 +12,7 @@ import { ProductCard } from '@/components/home/ProductCard';
 import { SupportSection } from '@/components/home/SupportSection';
 import { Footer } from '@/components/home/Footer';
 import { SectionHeader } from '@/components/common/SectionHeader';
+import { ViewModeToggle, type ViewMode } from '@/components/common/ViewModeToggle';
 import { Fonts } from '@/constants/theme';
 import { useRouter } from 'expo-router';
 // Keep top UI (strip, search, tags) sticky while scrolling
@@ -19,6 +20,7 @@ import { useRouter } from 'expo-router';
 export default function HomeScreen() {
   const router = useRouter();
   const { width } = useWindowDimensions();
+  const [categoryView, setCategoryView] = useState<ViewMode>('list');
   // Category grid sizing — responsive by width to avoid tiny cards on phones
   const catPad = width < 480 ? Spacing.lg : Spacing.xl;
   const gap = width < 480 ? Spacing.md : Spacing.lg;
@@ -62,8 +64,8 @@ export default function HomeScreen() {
       <View style={[styles.section, { paddingHorizontal: catPad }]}>
         <SectionHeader
           title="Shop by Category"
-          onPressAction={() => router.push('/category')}
           titleStyle={{ fontSize: 24, fontWeight: '900', fontFamily: Fonts.rounded }}
+          rightElement={<ViewModeToggle value={categoryView} onChange={setCategoryView} />}
         />
         <View style={[styles.categoryGrid, { justifyContent: 'center', marginHorizontal: -gap / 2 }]}>
           {categoriesToShow.map((cat) => (
